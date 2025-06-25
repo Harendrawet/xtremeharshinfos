@@ -5,14 +5,50 @@
   <title>Login/Register Flow</title>
   <link rel="stylesheet" href="style.css">
   <script>
-    window.onload = function() {
-      setTimeout(function() {
-        document.querySelector(".loading-screen").style.display = "none";
-        document.querySelector(".main-page").style.display = "block";
-      }, 3000);
-    };
+    const users = {};
 
-    const users = {}; // Store registered users in memory
+    function register() {
+      const user = document.getElementById("regUser").value;
+      const pass = document.getElementById("regPass").value;
+      const confirm = document.getElementById("regConfirm").value;
+      let error = "";
+
+      if (user.length < 5 || !/[0-9]/.test(user)) {
+        error += "Username must be at least 5 characters and contain a number.\n";
+      }
+
+      if (pass.length < 8) {
+        error += "Password must be at least 8 characters.\n";
+      }
+
+      if (pass !== confirm) {
+        error += "Passwords do not match.\n";
+      }
+
+      if (users[user]) {
+        error += "Username already registered.\n";
+      }
+
+      if (error) {
+        alert(error);
+      } else {
+        users[user] = pass;
+        openLogin();
+      }
+    }
+
+    function login() {
+      const user = document.getElementById("loginUser").value;
+      const pass = document.getElementById("loginPass").value;
+      if (!users[user]) {
+        alert("Username not registered");
+      } else if (users[user] !== pass) {
+        alert("Incorrect password");
+      } else {
+        alert("Logged in successfully as " + user);
+        document.getElementById("loginPopup").style.display = "none";
+      }
+    }
 
     window.onload = function () {
       setTimeout(function () {
@@ -36,9 +72,6 @@
     }
 
     function register() {
-      const errorBox = document.getElementById("regError");
-      errorBox.style.display = "none";
-      errorBox.innerText = "";
       const user = document.getElementById("regUser").value;
       const pass = document.getElementById("regPass").value;
       const confirm = document.getElementById("regConfirm").value;
@@ -56,42 +89,22 @@
         error += "Passwords do not match.\n";
       }
 
-      if (users[user]) {
-        error += "Username already registered.\n";
-      }
-
       if (error) {
-        errorBox.style.display = "block";
-        errorBox.innerText = error.trim();
-        return;
-      }
         alert(error);
       } else {
-        users[user] = pass;
-        alert("Registration successful. Please log in.");
         openLogin();
       }
     }
 
     function login() {
-      const errorBox = document.getElementById("loginError");
-      errorBox.style.display = "none";
-      errorBox.innerText = "";
       const user = document.getElementById("loginUser").value;
       const pass = document.getElementById("loginPass").value;
-
-      if (!users[user]) {
-        errorBox.style.display = "block"; errorBox.innerText = "⚠️ This username is not registered.";
-        return;
+      if (user && pass) {
+        alert("Logged in as " + user);
+        document.getElementById("loginPopup").style.display = "none";
+      } else {
+        alert("Please enter both username and password");
       }
-
-      if (users[user] !== pass) {
-        errorBox.style.display = "block"; errorBox.innerText = "⚠️ Incorrect password.";
-        return;
-      }
-
-      alert("Logged in successfully as " + user);
-      document.getElementById("loginPopup").style.display = "none";
     }
   </script>
 </head>
@@ -132,7 +145,7 @@
   <div id="loginPopup" class="popup">
     <h3>Login</h3>
     <input type="text" id="loginUser" placeholder="Username"><br>
-    <input type="password" id="loginPass" placeholder="Password"><br><div id="loginError" class="error-box"></div>
+    <input type="password" id="loginPass" placeholder="Password"><br>
     <button onclick="login()">Login</button>
     <button class="register-btn" onclick="openRegister()">Register</button>
   </div>
@@ -141,7 +154,7 @@
     <h3>Register</h3>
     <input type="text" id="regUser" placeholder="Username"><br>
     <input type="password" id="regPass" placeholder="Password"><br>
-    <input type="password" id="regConfirm" placeholder="Confirm Password"><br><div id="regError" class="error-box"></div>
+    <input type="password" id="regConfirm" placeholder="Confirm Password"><br>
     <button onclick="register()">Register</button>
   </div>
 </body>
