@@ -151,3 +151,17 @@ body {
 .register-btn {
   background-color: #007bff;
 }
+
+.error-box {
+  background-color: #8e44ad;
+  color: white;
+  padding: 6px 12px;
+  margin-top: 4px;
+  font-size: 14px;
+  border-radius: 6px;
+  width: fit-content;
+  max-width: 250px;
+  display: none;
+  position: relative;
+  top: -5px;
+}
