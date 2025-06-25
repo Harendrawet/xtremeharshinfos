@@ -37,39 +37,7 @@
       }
     }
 
-    
     function login() {
-      const user = document.getElementById("loginUser").value;
-      const pass = document.getElementById("loginPass").value;
-      const errorBox = document.getElementById("loginError");
-      errorBox.style.display = "none";
-      errorBox.innerText = "";
-
-      if (!users[user]) {
-        errorBox.style.display = "block";
-        errorBox.innerText = "⚠️ This username is not registered.";
-        return;
-      }
-
-      if (users[user] !== pass) {
-        errorBox.style.display = "block";
-        errorBox.innerText = "⚠️ Incorrect password.";
-        return;
-      }
-
-      closeLogin();  // hide popup
-      document.getElementById("loginMenuBtn").style.display = "none"; // hide login button
-      const userDisplay = document.createElement("div");
-      userDisplay.innerText = user;
-      userDisplay.style.color = "white";
-      userDisplay.style.margin = "8px";
-      userDisplay.style.padding = "6px 12px";
-      userDisplay.style.backgroundColor = "#6a0dad";
-      userDisplay.style.borderRadius = "6px";
-      userDisplay.style.pointerEvents = "none";
-      document.querySelector(".menu-content").appendChild(userDisplay);
-    }
-
       const user = document.getElementById("loginUser").value;
       const pass = document.getElementById("loginPass").value;
       if (!users[user]) {
@@ -84,7 +52,7 @@
 
     window.onload = function () {
       setTimeout(function () {
-        document.querySelector('.loading-screen').style.display = 'none';
+        document.querySelector('.loading').style.display = 'none';
         document.querySelector('.main-page').style.display = 'block';
       }, 3000);
     };
@@ -128,39 +96,7 @@
       }
     }
 
-    
     function login() {
-      const user = document.getElementById("loginUser").value;
-      const pass = document.getElementById("loginPass").value;
-      const errorBox = document.getElementById("loginError");
-      errorBox.style.display = "none";
-      errorBox.innerText = "";
-
-      if (!users[user]) {
-        errorBox.style.display = "block";
-        errorBox.innerText = "⚠️ This username is not registered.";
-        return;
-      }
-
-      if (users[user] !== pass) {
-        errorBox.style.display = "block";
-        errorBox.innerText = "⚠️ Incorrect password.";
-        return;
-      }
-
-      closeLogin();  // hide popup
-      document.getElementById("loginMenuBtn").style.display = "none"; // hide login button
-      const userDisplay = document.createElement("div");
-      userDisplay.innerText = user;
-      userDisplay.style.color = "white";
-      userDisplay.style.margin = "8px";
-      userDisplay.style.padding = "6px 12px";
-      userDisplay.style.backgroundColor = "#6a0dad";
-      userDisplay.style.borderRadius = "6px";
-      userDisplay.style.pointerEvents = "none";
-      document.querySelector(".menu-content").appendChild(userDisplay);
-    }
-
       const user = document.getElementById("loginUser").value;
       const pass = document.getElementById("loginPass").value;
       if (user && pass) {
@@ -221,14 +157,5 @@
     <input type="password" id="regConfirm" placeholder="Confirm Password"><br>
     <button onclick="register()">Register</button>
   </div>
-
-<script>
-  window.onload = function () {
-    setTimeout(() => {
-      document.querySelector('.loading-screen').style.display = 'none';
-      document.querySelector('.main-page').style.display = 'block';
-    }, 3000);
-  };
-</script>
 </body>
 </html>
