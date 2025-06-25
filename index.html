@@ -221,5 +221,14 @@
     <input type="password" id="regConfirm" placeholder="Confirm Password"><br>
     <button onclick="register()">Register</button>
   </div>
+
+<script>
+  window.onload = function () {
+    setTimeout(() => {
+      document.querySelector('.loading-screen').style.display = 'none';
+      document.querySelector('.main-page').style.display = 'block';
+    }, 3000);
+  };
+</script>
 </body>
 </html>
