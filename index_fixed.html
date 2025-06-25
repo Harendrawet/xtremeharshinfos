@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login/Register Flow</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    function saveUsers(users) {
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+
+    function loadUsers() {
+      const users = localStorage.getItem('users');
+      return users ? JSON.parse(users) : {};
+    }
+
+    function register() {
+      const user = document.getElementById("regUser").value;
+      const pass = document.getElementById("regPass").value;
+      const confirm = document.getElementById("regConfirm").value;
+      let error = "";
+
+      const users = loadUsers();
+
+      if (user.length < 5 || !/[0-9]/.test(user)) {
+        error += "Username must be at least 5 characters and contain a number.\n";
+      }
+
+      if (pass.length < 8) {
+        error += "Password must be at least 8 characters.\n";
+      }
+
+      if (pass !== confirm) {
+        error += "Passwords do not match.\n";
+      }
+
+      if (users[user]) {
+        error += "Username already registered.\n";
+      }
+
+      if (error) {
+        alert(error);
+      } else {
+        users[user] = pass;
+        saveUsers(users);
+        alert("Registration successful. Please login.");
+        openLogin();
+      }
+    }
+
+    function login() {
+      const user = document.getElementById("loginUser").value;
+      const pass = document.getElementById("loginPass").value;
+
+      const users = loadUsers();
+
+      if (!users[user]) {
+        alert("Username not registered.");
+      } else if (users[user] !== pass) {
+        alert("Incorrect password.");
+      } else {
+        alert("Logged in successfully as " + user);
+        document.getElementById("loginPopup").style.display = "none";
+      }
+    }
+
+    window.onload = function () {
+      setTimeout(function () {
+        document.querySelector('.loading').style.display = 'none';
+        document.querySelector('.main-page').style.display = 'block';
+      }, 1000);
+    };
+
+    function toggleMenu() {
+      document.getElementById("menuPanel").classList.toggle("visible");
+    }
+
+    function openLogin() {
+      document.getElementById("loginPopup").style.display = "block";
+      document.getElementById("registerPopup").style.display = "none";
+    }
+
+    function openRegister() {
+      document.getElementById("registerPopup").style.display = "block";
+      document.getElementById("loginPopup").style.display = "none";
+    }
+  </script>
+</head>
+<body>
+  <div class="loading">Loading...</div>
+  <div class="main-page" style="display:none;">
+    <button onclick="toggleMenu()">☰ Menu</button>
+    <div id="menuPanel" class="menu-panel">
+      <button onclick="openLogin()">Login</button>
+      <button onclick="openRegister()">Register</button>
+    </div>
+
+    <div id="loginPopup" class="popup">
+      <h2>Login</h2>
+      <input id="loginUser" placeholder="Username" /><br>
+      <input id="loginPass" placeholder="Password" type="password" /><br>
+      <button onclick="login()">Login</button>
+    </div>
+
+    <div id="registerPopup" class="popup">
+      <h2>Register</h2>
+      <input id="regUser" placeholder="Username" /><br>
+      <input id="regPass" placeholder="Password" type="password" /><br>
+      <input id="regConfirm" placeholder="Confirm Password" type="password" /><br>
+      <button onclick="register()">Register</button>
+    </div>
+  </div>
+</body>
+</html>
