@@ -3,14 +3,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Links Page</title>
+  <title>Links Page with Menu</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: linear-gradient(145deg, #0a0f24, #131b3f);
       color: white;
-      overflow: hidden;
+      overflow-x: hidden;
     }
     .loader {
       position: fixed;
@@ -53,11 +53,59 @@
       text-align: center;
       font-size: 18px;
     }
+    .menu-button {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      width: 40px;
+      height: 30px;
+      background: #a259ff;
+      color: white;
+      font-size: 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 10000;
+    }
+    .side-menu {
+      position: fixed;
+      top: 0;
+      right: -200px;
+      width: 200px;
+      height: 100%;
+      background-color: #240444;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: right 0.3s ease;
+      z-index: 9998;
+    }
+    .side-menu.active {
+      right: 0;
+    }
+    .side-menu button {
+      background-color: #a259ff;
+      border: none;
+      color: white;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <div class="loader" id="loader">
     <div class="spinner"></div>
+  </div>
+
+  <button class="menu-button" onclick="toggleMenu()">☰</button>
+
+  <div class="side-menu" id="sideMenu">
+    <button>Profile</button>
+    <button>Contact</button>
+    <button>Login</button>
   </div>
 
   <div class="main" id="main-content">
@@ -79,6 +127,11 @@
       document.getElementById('loader').style.display = 'none';
       document.getElementById('main-content').style.display = 'flex';
     }, 3000);
+
+    function toggleMenu() {
+      const menu = document.getElementById('sideMenu');
+      menu.classList.toggle('active');
+    }
   </script>
 </body>
 </html>
