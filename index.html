@@ -4,15 +4,111 @@
   <meta charset="UTF-8">
   <title>Login/Register Flow</title>
   <link rel="stylesheet" href="style.css">
-  
+  <script>
+    const users = {};
+
+    function register() {
+      const user = document.getElementById("regUser").value;
+      const pass = document.getElementById("regPass").value;
+      const confirm = document.getElementById("regConfirm").value;
+      let error = "";
+
+      if (user.length < 5 || !/[0-9]/.test(user)) {
+        error += "Username must be at least 5 characters and contain a number.\n";
+      }
+
+      if (pass.length < 8) {
+        error += "Password must be at least 8 characters.\n";
+      }
+
+      if (pass !== confirm) {
+        error += "Passwords do not match.\n";
+      }
+
+      if (users[user]) {
+        error += "Username already registered.\n";
+      }
+
+      if (error) {
+        alert(error);
+      } else {
+        users[user] = pass;
+        openLogin();
+      }
+    }
+
+    function login() {
+      const user = document.getElementById("loginUser").value;
+      const pass = document.getElementById("loginPass").value;
+      if (!users[user]) {
+        alert("Username not registered");
+      } else if (users[user] !== pass) {
+        alert("Incorrect password");
+      } else {
+        alert("Logged in successfully as " + user);
+        document.getElementById("loginPopup").style.display = "none";
+      }
+    }
+
+    window.onload = function () {
+      setTimeout(function () {
+        document.querySelector('.loading').style.display = 'none';
+        document.querySelector('.main-page').style.display = 'block';
+      }, 3000);
+    };
+
+    function toggleMenu() {
+      document.getElementById("menuPanel").classList.toggle("visible");
+    }
+
+    function openLogin() {
+      document.getElementById("loginPopup").style.display = "block";
+      document.getElementById("registerPopup").style.display = "none";
+    }
+
+    function openRegister() {
+      document.getElementById("registerPopup").style.display = "block";
+      document.getElementById("loginPopup").style.display = "none";
+    }
+
+    function register() {
+      const user = document.getElementById("regUser").value;
+      const pass = document.getElementById("regPass").value;
+      const confirm = document.getElementById("regConfirm").value;
+      let error = "";
+
+      if (user.length < 5 || !/[0-9]/.test(user)) {
+        error += "Username must be at least 5 characters and contain a number.\n";
+      }
+
+      if (pass.length < 8) {
+        error += "Password must be at least 8 characters.\n";
+      }
+
+      if (pass !== confirm) {
+        error += "Passwords do not match.\n";
+      }
+
+      if (error) {
+        alert(error);
+      } else {
+        openLogin();
+      }
+    }
+
+    function login() {
+      const user = document.getElementById("loginUser").value;
+      const pass = document.getElementById("loginPass").value;
+      if (user && pass) {
+        alert("Logged in as " + user);
+        document.getElementById("loginPopup").style.display = "none";
+      } else {
+        alert("Please enter both username and password");
+      }
+    }
+  </script>
 </head>
 <body>
-
-<script>
-  // Auto-clear localStorage on every load (for clean testing)
-  localStorage.removeItem("users");
-</script>
-
   <div class="loading">
     <div class="spinner"></div>
     <p>Loading...</p>
@@ -61,72 +157,5 @@
     <input type="password" id="regConfirm" placeholder="Confirm Password"><br>
     <button onclick="register()">Register</button>
   </div>
-
-<script>
-  let users = JSON.parse(localStorage.getItem("users")) || {};
-
-  function saveUsers() {
-    localStorage.setItem("users", JSON.stringify(users));
-  }
-
-  function openLogin() {
-    document.getElementById("loginPopup").style.display = "flex";
-    document.getElementById("registerPopup").style.display = "none";
-  }
-
-  function openRegister() {
-    document.getElementById("registerPopup").style.display = "flex";
-    document.getElementById("loginPopup").style.display = "none";
-  }
-
-  function closePopups() {
-    document.getElementById("loginPopup").style.display = "none";
-    document.getElementById("registerPopup").style.display = "none";
-  }
-
-  function register() {
-    const user = document.getElementById("regUser").value;
-    const pass = document.getElementById("regPass").value;
-    const confirm = document.getElementById("regConfirm").value;
-    let error = "";
-
-    if (user.length < 5 || !/[0-9]/.test(user)) {
-      error += "Username must be at least 5 characters and contain a number.\n";
-    }
-    if (pass.length < 8) {
-      error += "Password must be at least 8 characters.\n";
-    }
-    if (pass !== confirm) {
-      error += "Passwords do not match.\n";
-    }
-    if (users[user]) {
-      error += "Username already registered.\n";
-    }
-
-    if (error) {
-      alert(error);
-    } else {
-      users[user] = pass;
-      saveUsers();
-      openLogin();
-      alert("Registration successful!");
-    }
-  }
-
-  function login() {
-    const user = document.getElementById("loginUser").value;
-    const pass = document.getElementById("loginPass").value;
-
-    if (!users[user]) {
-      alert("Username not registered.");
-    } else if (users[user] !== pass) {
-      alert("Incorrect password.");
-    } else {
-      alert("Login successful as " + user);
-      closePopups();
-    }
-  }
-</script>
-
 </body>
 </html>
