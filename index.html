@@ -1,3 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Validated Login Site</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .loading {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #000;
+      color: #fff;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .main-page {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="loading">Loading...</div>
+<div class="main-page">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,6 +73,50 @@
 
   
 
+<!-- Login/Register Popups -->
+
+</div>
+
+
+</div>
+
+<style>
+  .popup {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  .popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 250px;
+  }
+  .popup-content input {
+    margin: 5px 0;
+    padding: 8px;
+    width: 80%;
+  }
+  .popup-content button {
+    padding: 8px 16px;
+    margin-top: 10px;
+  }
+</style>
+
+
+
+
+
+
+</body>
+</html>
+</div>
 <!-- Login/Register Popups -->
 <div id="loginPopup" class="popup" style="display:none;">
   <div class="popup-content">
@@ -157,6 +230,17 @@
       closePopups();
     }
   }
+</script>
+
+<script>
+  window.onload = function () {
+    setTimeout(function () {
+      const loadingScreen = document.querySelector('.loading');
+      const mainPage = document.querySelector('.main-page');
+      if (loadingScreen) loadingScreen.style.display = 'none';
+      if (mainPage) mainPage.style.display = 'block';
+    }, 3000);
+  };
 </script>
 
 </body>
