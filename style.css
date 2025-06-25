@@ -74,8 +74,10 @@ body {
 .main-wrapper {
   transition: transform 0.4s ease;
   position: relative;
-  background-color: #0f0f0f; /* Ensures no black area appears */
+  background-color: #0f0f0f;
   min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 .main-wrapper.shifted {
@@ -102,7 +104,7 @@ body {
 }
 
 .menu-spacer {
-  height: 80px; /* pushes menu items below menu button */
+  height: 100px;
 }
 
 .menu-option {
