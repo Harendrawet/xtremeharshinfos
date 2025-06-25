@@ -70,7 +70,7 @@
     .side-menu {
       position: fixed;
       top: 0;
-      right: -200px;
+      right: -220px; visibility: hidden; opacity: 0;
       width: 200px;
       height: 100%;
       background-color: #240444;
@@ -102,7 +102,7 @@
 
   <button class="menu-button" onclick="toggleMenu()">☰</button>
 
-  <div class="side-menu" id="sideMenu">
+  <div class="side-menu" id="sideMenu" style="margin-top: 60px;">
     <button>Profile</button>
     <button>Contact</button>
     <button>Login</button>
