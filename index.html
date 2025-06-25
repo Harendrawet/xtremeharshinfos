@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Final Unified Menu Panel</title>
+  <title>Menu Overlay Only</title>
   <link rel="stylesheet" href="style.css">
   <script>
     window.onload = function () {
@@ -13,8 +13,8 @@
     };
 
     function toggleMenu() {
-      document.getElementById("mainWrapper").classList.toggle("shifted");
-      document.getElementById("menuPanel").classList.toggle("visible");
+      const menuPanel = document.getElementById("menuPanel");
+      menuPanel.classList.toggle("visible");
     }
   </script>
 </head>
@@ -24,7 +24,7 @@
     <p>Loading...</p>
   </div>
 
-  <div id="mainWrapper" class="main-wrapper">
+  <div class="main-wrapper">
     <div id="menuPanel" class="menu-panel">
       <div class="menu-spacer"></div>
       <div class="menu-option">Profile</div>

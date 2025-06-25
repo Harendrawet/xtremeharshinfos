@@ -52,7 +52,7 @@ body {
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 999;
+  z-index: 1001;
 }
 
 .box-container {
@@ -72,7 +72,6 @@ body {
 }
 
 .main-wrapper {
-  transition: transform 0.4s ease;
   position: relative;
   background-color: #0f0f0f;
   min-height: 100vh;
@@ -80,27 +79,22 @@ body {
   overflow-x: hidden;
 }
 
-.main-wrapper.shifted {
-  transform: translateX(-100px);
-}
-
 .menu-panel {
   position: fixed;
   top: 0;
-  right: -180px;
+  right: 0;
   width: 180px;
   height: 100vh;
   background-color: #220044;
   padding-top: 40px;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
-  transition: right 0.4s ease;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .menu-panel.visible {
-  right: 0;
+  display: flex;
 }
 
 .menu-spacer {
