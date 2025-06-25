@@ -2,148 +2,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Enhanced Login/Register</title>
+  <meta charset="UTF-8">
+  <title>Links Page</title>
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; background-color: #111; color: white; }
-    .loading-screen {
-      display: flex; align-items: center; justify-content: center;
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background-color: black; z-index: 999;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(145deg, #0a0f24, #131b3f);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
     }
-    .main-page { display: none; padding: 20px; }
-    .menu-content { position: absolute; top: 10px; right: 10px; }
-    .popup { background: #222; padding: 20px; border-radius: 8px; display: none; position: absolute; top: 80px; right: 10px; }
-    .popup input { display: block; margin-bottom: 10px; padding: 6px; width: 200px; }
-    .popup button { padding: 6px 12px; }
-    .error-box {
-      background-color: #6a0dad; color: white;
-      padding: 6px 12px; margin-bottom: 8px;
-      border-radius: 6px; display: none;
+    .box {
+      width: 90%;
+      max-width: 400px;
+      background: #0f112b;
+      border: 1px solid #6a0dad;
+      border-radius: 12px;
+      margin: 10px 0;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(106, 13, 173, 0.3);
+      text-align: center;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
-  <div class="loading-screen"><h1>Loading...</h1></div>
-  <div class="main-page">
-    <div class="menu-content">
-      <button id="loginMenuBtn" onclick="openLogin()">Login</button>
-    </div>
-
-    <div id="loginPopup" class="popup">
-      <div id="loginError" class="error-box"></div>
-      <input type="text" id="loginUser" placeholder="Username" />
-      <input type="password" id="loginPass" placeholder="Password" />
-      <button onclick="login()">Login</button>
-      <button style="background-color: blue; color: white;" onclick="openRegister()">Register</button>
-    </div>
-
-    <div id="registerPopup" class="popup">
-      <div id="registerError" class="error-box"></div>
-      <input type="text" id="registerUser" placeholder="Username" />
-      <input type="password" id="registerPass" placeholder="Password" />
-      <input type="password" id="confirmPass" placeholder="Confirm Password" />
-      <button onclick="register()">Register</button>
-    </div>
-
-    <h2>Welcome to the site!</h2>
-  </div>
-
-  <script>
-    const users = {};
-
-    function openLogin() {
-      document.getElementById("loginPopup").style.display = "block";
-      document.getElementById("registerPopup").style.display = "none";
-    }
-
-    function openRegister() {
-      document.getElementById("registerPopup").style.display = "block";
-      document.getElementById("loginPopup").style.display = "none";
-    }
-
-    function closeLogin() {
-      document.getElementById("loginPopup").style.display = "none";
-    }
-
-    function closeRegister() {
-      document.getElementById("registerPopup").style.display = "none";
-    }
-
-    function register() {
-      const username = document.getElementById("registerUser").value;
-      const password = document.getElementById("registerPass").value;
-      const confirmPassword = document.getElementById("confirmPass").value;
-      const errorBox = document.getElementById("registerError");
-
-      errorBox.style.display = "none";
-      errorBox.innerText = "";
-
-      if (username.length < 5 || !/[0-9]/.test(username)) {
-        errorBox.style.display = "block";
-        errorBox.innerText = "⚠️ Username must be at least 5 characters and contain a number.";
-        return;
-      }
-
-      if (password.length < 8) {
-        errorBox.style.display = "block";
-        errorBox.innerText = "⚠️ Password must be at least 8 characters.";
-        return;
-      }
-
-      if (password !== confirmPassword) {
-        errorBox.style.display = "block";
-        errorBox.innerText = "⚠️ Passwords do not match.";
-        return;
-      }
-
-      users[username] = password;
-      closeRegister();
-      openLogin();
-    }
-
-    function login() {
-      const username = document.getElementById("loginUser").value;
-      const password = document.getElementById("loginPass").value;
-      const errorBox = document.getElementById("loginError");
-
-      errorBox.style.display = "none";
-      errorBox.innerText = "";
-
-      if (!users[username]) {
-        errorBox.style.display = "block";
-        errorBox.innerText = "⚠️ This username is not registered.";
-        return;
-      }
-
-      if (users[username] !== password) {
-        errorBox.style.display = "block";
-        errorBox.innerText = "⚠️ Incorrect password.";
-        return;
-      }
-
-      closeLogin();
-      document.getElementById("loginMenuBtn").style.display = "none";
-
-      const userDisplay = document.createElement("div");
-      userDisplay.innerText = username;
-      userDisplay.style.color = "white";
-      userDisplay.style.margin = "8px";
-      userDisplay.style.padding = "6px 12px";
-      userDisplay.style.backgroundColor = "#6a0dad";
-      userDisplay.style.borderRadius = "6px";
-      userDisplay.style.pointerEvents = "none";
-
-      document.querySelector(".menu-content").appendChild(userDisplay);
-    }
-
-    window.onload = function () {
-      setTimeout(() => {
-        document.querySelector('.loading-screen').style.display = 'none';
-        document.querySelector('.main-page').style.display = 'block';
-      }, 3000);
-    };
-  </script>
+  <h1>Available Links</h1>
+  <div class="box">Link 1</div>
+  <div class="box">Link 2</div>
+  <div class="box">Link 3</div>
+  <div class="box">Link 4</div>
+  <div class="box">Link 5</div>
+  <div class="box">Link 6</div>
+  <div class="box">Link 7</div>
+  <div class="box">Link 8</div>
+  <div class="box">Link 9</div>
+  <div class="box">Link 10</div>
 </body>
 </html>
