@@ -81,7 +81,7 @@ body {
 }
 
 .main-wrapper.shifted {
-  transform: translateX(-100px); /* reverted here */
+  transform: translateX(-100px);
 }
 
 .menu-panel {
@@ -104,17 +104,17 @@ body {
 }
 
 .menu-spacer {
-  height: 100px;
+  height: 80px;
 }
 
 .menu-option {
   color: white;
   background-color: #6a0dad;
-  padding: 14px 20px;
-  width: 80%;
+  padding: 18px 10px;
+  width: 90%;
   text-align: center;
-  border-radius: 10px;
-  font-size: 18px;
+  border-radius: 12px;
+  font-size: 20px;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 12px;
 }
