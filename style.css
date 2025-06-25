@@ -81,7 +81,7 @@ body {
 }
 
 .main-wrapper.shifted {
-  transform: translateX(-100px);
+  transform: translateX(-100px); /* reverted here */
 }
 
 .menu-panel {
