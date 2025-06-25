@@ -2,34 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login/Register</title>
+  <title>Login/Register Flow</title>
   <link rel="stylesheet" href="style.css">
   <script>
-    function saveUsers(users) {
-      localStorage.setItem('users', JSON.stringify(users));
-    }
-
-    function loadUsers() {
-      const users = localStorage.getItem('users');
-      return users ? JSON.parse(users) : {};
-    }
+    const users = {};
 
     function register() {
       const user = document.getElementById("regUser").value;
       const pass = document.getElementById("regPass").value;
       const confirm = document.getElementById("regConfirm").value;
-      const users = loadUsers();
       let error = "";
 
       if (user.length < 5 || !/[0-9]/.test(user)) {
         error += "Username must be at least 5 characters and contain a number.\n";
       }
+
       if (pass.length < 8) {
         error += "Password must be at least 8 characters.\n";
       }
+
       if (pass !== confirm) {
         error += "Passwords do not match.\n";
       }
+
       if (users[user]) {
         error += "Username already registered.\n";
       }
@@ -38,8 +33,6 @@
         alert(error);
       } else {
         users[user] = pass;
-        saveUsers(users);
-        alert("Registered successfully. Please login.");
         openLogin();
       }
     }
@@ -47,16 +40,25 @@
     function login() {
       const user = document.getElementById("loginUser").value;
       const pass = document.getElementById("loginPass").value;
-      const users = loadUsers();
-
       if (!users[user]) {
-        alert("Username not registered.");
+        alert("Username not registered");
       } else if (users[user] !== pass) {
-        alert("Incorrect password.");
+        alert("Incorrect password");
       } else {
         alert("Logged in successfully as " + user);
         document.getElementById("loginPopup").style.display = "none";
       }
+    }
+
+    window.onload = function () {
+      setTimeout(function () {
+        document.querySelector('.loading').style.display = 'none';
+        document.querySelector('.main-page').style.display = 'block';
+      }, 3000);
+    };
+
+    function toggleMenu() {
+      document.getElementById("menuPanel").classList.toggle("visible");
     }
 
     function openLogin() {
@@ -69,34 +71,91 @@
       document.getElementById("loginPopup").style.display = "none";
     }
 
-    window.onload = function () {
-      setTimeout(function () {
-        document.querySelector('.loading').style.display = 'none';
-        document.querySelector('.main-page').style.display = 'block';
-      }, 1000);
-    };
+    function register() {
+      const user = document.getElementById("regUser").value;
+      const pass = document.getElementById("regPass").value;
+      const confirm = document.getElementById("regConfirm").value;
+      let error = "";
+
+      if (user.length < 5 || !/[0-9]/.test(user)) {
+        error += "Username must be at least 5 characters and contain a number.\n";
+      }
+
+      if (pass.length < 8) {
+        error += "Password must be at least 8 characters.\n";
+      }
+
+      if (pass !== confirm) {
+        error += "Passwords do not match.\n";
+      }
+
+      if (error) {
+        alert(error);
+      } else {
+        openLogin();
+      }
+    }
+
+    function login() {
+      const user = document.getElementById("loginUser").value;
+      const pass = document.getElementById("loginPass").value;
+      if (user && pass) {
+        alert("Logged in as " + user);
+        document.getElementById("loginPopup").style.display = "none";
+      } else {
+        alert("Please enter both username and password");
+      }
+    }
   </script>
 </head>
 <body>
-  <div class="loading">Loading...</div>
-  <div class="main-page" style="display:none;">
-    <button onclick="openLogin()">Login</button>
-    <button onclick="openRegister()">Register</button>
+  <div class="loading">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
 
-    <div id="loginPopup" class="popup">
-      <h2>Login</h2>
-      <input id="loginUser" placeholder="Username" /><br>
-      <input id="loginPass" placeholder="Password" type="password" /><br>
-      <button onclick="login()">Login</button>
+  <div class="main-wrapper">
+    <div id="menuPanel" class="menu-panel">
+      <div class="menu-spacer"></div>
+      <div class="menu-option">Profile</div>
+      <div class="menu-option">Contact</div>
+      <button class="menu-option" onclick="openLogin()">Login</button>
     </div>
 
-    <div id="registerPopup" class="popup">
-      <h2>Register</h2>
-      <input id="regUser" placeholder="Username" /><br>
-      <input id="regPass" placeholder="Password" type="password" /><br>
-      <input id="regConfirm" placeholder="Confirm Password" type="password" /><br>
-      <button onclick="register()">Register</button>
+    <div class="main-page" style="display:none;">
+      <div class="header">
+        <h1 class="text">Get All Links Here</h1>
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+      </div>
+      <div class="box-container">
+        <div class="link-box">Link 1</div>
+        <div class="link-box">Link 2</div>
+        <div class="link-box">Link 3</div>
+        <div class="link-box">Link 4</div>
+        <div class="link-box">Link 5</div>
+        <div class="link-box">Link 6</div>
+        <div class="link-box">Link 7</div>
+        <div class="link-box">Link 8</div>
+        <div class="link-box">Link 9</div>
+        <div class="link-box">Link 10</div>
+      </div>
     </div>
+  </div>
+
+  <div id="loginPopup" class="popup">
+    <h3>Login</h3>
+    <input type="text" id="loginUser" placeholder="Username"><br>
+    <input type="password" id="loginPass" placeholder="Password"><br>
+    <button onclick="login()">Login</button>
+    <button class="register-btn" onclick="openRegister()">Register</button>
+  </div>
+
+  <div id="registerPopup" class="popup">
+    <h3>Register</h3>
+    <input type="text" id="regUser" placeholder="Username"><br>
+    <input type="password" id="regPass" placeholder="Password"><br>
+    <input type="password" id="regConfirm" placeholder="Confirm Password"><br>
+    <button onclick="register()">Register</button>
   </div>
 </body>
 </html>
