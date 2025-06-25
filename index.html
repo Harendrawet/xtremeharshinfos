@@ -5,6 +5,13 @@
   <title>Login/Register Flow</title>
   <link rel="stylesheet" href="style.css">
   <script>
+    window.onload = function() {
+      setTimeout(function() {
+        document.querySelector(".loading-screen").style.display = "none";
+        document.querySelector(".main-page").style.display = "block";
+      }, 3000);
+    };
+
     const users = {}; // Store registered users in memory
 
     window.onload = function () {
